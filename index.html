@@ -128,6 +128,13 @@ button{font-family:inherit;}
 .bar{height:8px;border-radius:99px;background:#efefe4;overflow:hidden;margin-top:7px;}
 .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--limedk),var(--lime));}
 
+/* svg icon sizing */
+.gi svg{width:22px;height:22px;display:block;}
+.iconbtn svg{width:20px;height:20px;color:var(--pine);}
+.ti svg{width:22px;height:22px;color:#1f2e1b;display:block;}
+.ov .ic svg{width:20px;height:20px;color:#1f2e1b;display:block;}
+.hero .acts button svg{width:14px;height:14px;vertical-align:-2px;margin-right:6px;}
+
 /* tabbar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
@@ -182,7 +189,7 @@ button{font-family:inherit;}
         <div class="avatar">J</div>
         <div><div class="hi">Hi Jay</div><div class="sub">Welcome to your wallet</div></div>
       </div>
-      <button class="iconbtn" id="bellBtn" aria-label="Alerts">🔔</button>
+      <button class="iconbtn" id="bellBtn" aria-label="Alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></button>
     </div>
 
     <div class="hero">
@@ -190,8 +197,8 @@ button{font-family:inherit;}
       <div class="bal">$10,112.31</div>
       <div class="meta">4 accounts · SchoolsFirst</div>
       <div class="acts">
-        <button class="btn-lime" id="addBtn">＋ Add Money</button>
-        <button class="btn-pale" id="wdBtn">⇅ Withdraw</button>
+        <button class="btn-lime" id="addBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Money</button>
+        <button class="btn-pale" id="wdBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Withdraw</button>
       </div>
     </div>
 
@@ -199,8 +206,8 @@ button{font-family:inherit;}
 
     <div class="shead"><h3>Overviews</h3><button id="ovAll">View all</button></div>
     <div class="ov2">
-      <div class="ov mint"><div class="ic">🧾</div><div class="v">$1,773.74</div><div class="l">Monthly bills</div></div>
-      <div class="ov butter"><div class="ic">🎯</div><div class="v">$1,918.06</div><div class="l">Savings target / mo</div></div>
+      <div class="ov mint"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.6-2 1.6-2-1.6L10 21l-2-1.6L6 21z"/><path d="M9.5 8.5h5M9.5 12h5"/></svg></div><div class="v">$1,773.74</div><div class="l">Monthly bills</div></div>
+      <div class="ov butter"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div><div class="v">$1,918.06</div><div class="l">Savings target / mo</div></div>
     </div>
 
     <div class="shead"><h3>Recent Activity</h3><button id="raAll">View all</button></div>
@@ -282,10 +289,10 @@ button{font-family:inherit;}
 </div><!-- /wrap -->
 
 <nav class="tabbar">
-  <button data-t="t-home" class="on"><span class="gi">⌂</span>Home</button>
-  <button data-t="t-activity"><span class="gi">∿</span>Activity</button>
-  <button data-t="t-banking"><span class="gi">▤</span>Banking</button>
-  <button data-t="t-account"><span class="gi">◉</span>Account</button>
+  <button data-t="t-home" class="on"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg></span>Home</button>
+  <button data-t="t-activity"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>Activity</button>
+  <button data-t="t-banking"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5M5.5 10v8M10 10v8M14 10v8M18.5 10v8M3 20h18"/></svg></span>Banking</button>
+  <button data-t="t-account"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.4 7-5.4s5.6 1.8 7 5.4"/></svg></span>Account</button>
 </nav>
 
 <div class="scrim" id="scrim"></div>
@@ -311,18 +318,18 @@ const ACCTS=[
  {n:'6-mo certificate',b:5839.56,s:'Share 40 · 3.90% APY · matures Feb 20, 2027'}
 ];
 const TXNS=[
- {e:'🚗',n:'State Farm Insurance',s:'Aug 22 · auto',a:228.02,t:'out'},
- {e:'🛒',n:'Target · San Clemente',s:'Aug 30 · debit',a:187.44,t:'out'},
- {e:'📱',n:'T-Mobile Auto Pay',s:'Aug 16 · card',a:90.09,t:'out'},
- {e:'🅿️',n:'Citation / permits',s:'Aug 18 · debit',a:57.50,t:'out'},
- {e:'💪',n:'24 Hour Fitness',s:'Aug 18 · card',a:29.99,t:'out'},
- {e:'🤖',n:'ChatGPT',s:'Aug 25 · card',a:20.00,t:'out'},
- {e:'📚',n:'QuillBot',s:'Aug 15 · card',a:19.95,t:'out'},
- {e:'🎵',n:'Spotify',s:'Aug 2 · card',a:6.99,t:'out'},
- {e:'🚗',n:'Mission Viejo Car Wash',s:'Aug 31 · debit',a:4.50,t:'out'},
- {e:'💵',n:'ATM deposit · tips',s:'Aug 16 · SchoolsFirst',a:384.00,t:'in'},
- {e:'💵',n:'ATM deposit · tips',s:'Aug 2 · SchoolsFirst',a:330.00,t:'in'},
- {e:'🧾',n:'aPizzaDoho payroll',s:'Aug 14 · ACH',a:280.66,t:'in'}
+ {ic:'car',n:'State Farm Insurance',s:'Aug 22 · auto',a:228.02,t:'out'},
+ {ic:'cart',n:'Target · San Clemente',s:'Aug 30 · debit',a:187.44,t:'out'},
+ {ic:'phone',n:'T-Mobile Auto Pay',s:'Aug 16 · card',a:90.09,t:'out'},
+ {ic:'park',n:'Citation / permits',s:'Aug 18 · debit',a:57.50,t:'out'},
+ {ic:'gym',n:'24 Hour Fitness',s:'Aug 18 · card',a:29.99,t:'out'},
+ {ic:'chat',n:'ChatGPT',s:'Aug 25 · card',a:20.00,t:'out'},
+ {ic:'book',n:'QuillBot',s:'Aug 15 · card',a:19.95,t:'out'},
+ {ic:'music',n:'Spotify',s:'Aug 2 · card',a:6.99,t:'out'},
+ {ic:'drop',n:'Mission Viejo Car Wash',s:'Aug 31 · debit',a:4.50,t:'out'},
+ {ic:'cash',n:'ATM deposit · tips',s:'Aug 16 · SchoolsFirst',a:384.00,t:'in'},
+ {ic:'cash',n:'ATM deposit · tips',s:'Aug 2 · SchoolsFirst',a:330.00,t:'in'},
+ {ic:'pay',n:'aPizzaDoho payroll',s:'Aug 14 · ACH',a:280.66,t:'in'}
 ];
 const BILLS=[
  ['Toyota GR86 loan','Car · $545.74'],
@@ -357,6 +364,22 @@ const BANKS=[
 "use strict";
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+/* ---------- custom line icons ---------- */
+const IC=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const ICONS={
+ car:IC('<path d="M4 15l2-5.2A2 2 0 0 1 7.9 8.3h8.2a2 2 0 0 1 1.9 1.5L20 15H4z"/><path d="M4 15v4M20 15v4"/><circle cx="7.5" cy="18.6" r="1.5"/><circle cx="16.5" cy="18.6" r="1.5"/>'),
+ cart:IC('<path d="M3 4h2l2.4 12h10.8l2-8H7"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="16.5" cy="20" r="1.4"/>'),
+ phone:IC('<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>'),
+ park:IC('<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M10 16.5v-9h3.5a2.75 2.75 0 0 1 0 5.5H10"/>'),
+ gym:IC('<path d="M7 7.5v9M17 7.5v9M4 10v4M20 10v4M7 12h10"/>'),
+ chat:IC('<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z"/><path d="M9 9.5h6M9 12.5h4"/>'),
+ book:IC('<path d="M5 5a2 2 0 0 1 2-2h12v16H7a2 2 0 0 0-2 2z"/><path d="M5 19a2 2 0 0 1 2-2h12"/>'),
+ music:IC('<path d="M9 18V6l10-2v11"/><circle cx="6.8" cy="18" r="2.4"/><circle cx="16.8" cy="15" r="2.4"/>'),
+ drop:IC('<path d="M12 3.5c3.5 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.5-6.8 6-11z"/>'),
+ cash:IC('<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.5v.01M18 14.5v.01"/>'),
+ pay:IC('<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 14.5l2 2 4-4.5"/>')
+};
 
 /* ---------- tabs ---------- */
 function goTab(id){
@@ -395,7 +418,7 @@ $$('#acctChips .chip').forEach(c=>c.addEventListener('click',()=>{
 /* ---------- home: txns ---------- */
 function txnRow(x){
   return `<div class="txn" data-n="${x.n}">
-    <div class="ti" style="background:${x.t==='in'?'var(--mint)':'#f2f2ea'}">${x.e}</div>
+    <div class="ti" style="background:${x.t==='in'?'var(--mint)':'#f2f2ea'}">${ICONS[x.ic]||''}</div>
     <div><div class="tn">${x.n}</div><div class="ts">${x.s}</div></div>
     <div class="ta ${x.t}">${x.t==='in'?'+':'−'}${fmt(x.a).slice(1)}</div></div>`;
 }
