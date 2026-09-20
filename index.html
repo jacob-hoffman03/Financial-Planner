@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Finance">
-<meta name="theme-color" content="#1f2e1b">
+<meta name="theme-color" content="#e8e8f7">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-512.png">
 <style>
@@ -135,6 +135,56 @@ button{font-family:inherit;}
 .ov .ic svg{width:20px;height:20px;color:#1f2e1b;display:block;}
 .hero .acts button svg{width:14px;height:14px;vertical-align:-2px;margin-right:6px;}
 
+/* lavender home (reference look) */
+.lav{background:#e8e8f7;margin:0 -16px;padding:calc(16px + env(safe-area-inset-top)) 22px 46px;position:relative;z-index:1;}
+.lav-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.lav .hi{font-size:17px;font-weight:800;letter-spacing:-.2px;}
+.lav .sub{font-size:12.5px;color:#6f6f84;margin-top:2px;}
+.lav-btns{display:flex;gap:10px;}
+.iconbtn.lt{background:rgba(255,255,255,.7);border:none;}
+.cur{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:16px;
+  font-size:10.5px;font-weight:800;letter-spacing:1.5px;color:#6f6f84;}
+.curbadge{width:17px;height:17px;border-radius:50%;background:#181818;color:#fff;font-size:10.5px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;}
+.bigbal{text-align:center;font-size:46px;font-weight:800;letter-spacing:-1.5px;margin-top:4px;font-variant-numeric:tabular-nums;}
+.bigbal .cents{font-size:20px;font-weight:700;color:#6f6f84;}
+.goalpill{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:3;background:#5da32e;color:#fff;
+  font-size:12px;font-weight:800;padding:8px 16px;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(93,163,46,.35);}
+.goalpill.sm{position:static;transform:none;font-size:10.5px;padding:5px 10px;box-shadow:none;}
+.band{position:relative;z-index:2;background:#161616;border-radius:26px;margin:-4px 2px 0;
+  padding:22px 16px 28px;display:flex;gap:10px;align-items:center;}
+.bandbtn{flex:1;border:none;border-radius:99px;background:#2e2e2e;color:#fff;padding:15px 0;font-size:14.5px;font-weight:700;cursor:pointer;}
+.bandmid{width:54px;height:54px;flex:none;border:none;border-radius:17px;background:#e8e8f7;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;}
+.bandmid svg{width:24px;height:24px;color:#161616;}
+.notch{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);width:44px;height:5px;border-radius:99px;background:#3a3a3a;}
+.ccard{position:relative;z-index:3;background:#fbfbF6;border-radius:28px 28px 0 0;margin:-18px -16px 0;
+  padding:22px 18px 8px;min-height:62vh;}
+.ctitle{font-size:14px;font-weight:800;margin:2px 0 10px;display:flex;justify-content:space-between;align-items:center;}
+.cgrid{display:grid;grid-template-columns:1fr 1.12fr;gap:14px;}
+.acc4{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.accc{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;border:none;background:none;padding:0;}
+.accc .c{width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;}
+.accc.add .c{background:#e8e8f7;border:none;}
+.accc.add .c svg{width:20px;height:20px;color:#161616;}
+.accc .n{font-size:10.5px;color:var(--mut);font-weight:600;}
+.incomecard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 13px;}
+.ilbl{font-size:11px;color:var(--mut);font-weight:600;}
+#minichart{width:100%;height:62px;display:block;margin:4px 0;}
+.irow{display:flex;justify-content:space-between;align-items:center;}
+.irow b{font-size:15.5px;font-variant-numeric:tabular-nums;letter-spacing:-.3px;}
+.mini-plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;
+  color:var(--mut);display:flex;align-items:center;justify-content:center;}
+.mini-plus svg{width:13px;height:13px;}
+.txncard{background:#fff;border-radius:18px;padding:2px 16px;margin-top:10px;}
+.mrow{display:flex;align-items:center;gap:13px;padding:13px 2px;border-bottom:1px solid #f0f0e6;cursor:pointer;font-size:14.5px;font-weight:700;}
+.mrow:last-child{border-bottom:none;}
+.mrow .mi{width:40px;height:40px;border-radius:50%;background:#f1f1ea;display:flex;align-items:center;justify-content:center;flex:none;}
+.mrow .mi svg{width:20px;height:20px;color:#1f2e1b;display:block;}
+.mrow .ms{font-size:11.5px;color:var(--mut);font-weight:600;margin-top:2px;}
+.mrow .chev{margin-left:auto;color:var(--mut);font-size:17px;}
+
 /* tabbar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
@@ -184,35 +234,45 @@ button{font-family:inherit;}
 
   <!-- ============ HOME ============ -->
   <section class="tab active" id="t-home">
-    <div class="topbar">
-      <div class="who">
-        <div class="avatar">J</div>
-        <div><div class="hi">Hi Jay</div><div class="sub">Welcome to your wallet</div></div>
+    <div class="lav">
+      <div class="lav-top">
+        <div><div class="hi">Hi Jay!</div><div class="sub">Welcome to your wallet</div></div>
+        <div class="lav-btns">
+          <button class="iconbtn lt" id="menuBtn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></button>
+          <button class="iconbtn lt" id="bellBtn" aria-label="Alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></button>
+        </div>
       </div>
-      <button class="iconbtn" id="bellBtn" aria-label="Alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></button>
+      <div class="cur"><span class="curbadge">$</span>USD</div>
+      <div class="bigbal">$10,112<span class="cents">.31</span></div>
+      <div class="goalpill">43% of savings goal</div>
     </div>
 
-    <div class="hero">
-      <div class="lbl"><span>Cash balance</span><span class="asof">AUG 31</span></div>
-      <div class="bal">$10,112.31</div>
-      <div class="meta">4 accounts · SchoolsFirst</div>
-      <div class="acts">
-        <button class="btn-lime" id="addBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Money</button>
-        <button class="btn-pale" id="wdBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Withdraw</button>
+    <div class="band">
+      <button class="bandbtn" id="addBtn">Add</button>
+      <button class="bandmid" id="midBtn" aria-label="Activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></button>
+      <button class="bandbtn" id="wdBtn">Withdraw</button>
+      <div class="notch"></div>
+    </div>
+
+    <div class="ccard">
+      <div class="cgrid">
+        <div>
+          <div class="ctitle">Accounts</div>
+          <div class="acc4" id="acc4"></div>
+        </div>
+        <div>
+          <div class="ctitle">Your income <button class="mini-plus" id="incGo" aria-label="See activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
+          <div class="incomecard">
+            <div class="ilbl">This month</div>
+            <svg id="minichart" viewBox="0 0 200 64" preserveAspectRatio="none"></svg>
+            <div class="irow"><b>$15,249.62</b><span class="goalpill sm">+131.6%</span></div>
+          </div>
+        </div>
       </div>
+      <div class="shead"><h3>Recent Activity</h3><button id="raAll">View all</button></div>
+      <div id="homeTxns"></div>
+      <div class="footnote">Snapshot from 2026 statements. Card months follow statement periods.</div>
     </div>
-
-    <div class="chips" id="acctChips"></div>
-
-    <div class="shead"><h3>Overviews</h3><button id="ovAll">View all</button></div>
-    <div class="ov2">
-      <div class="ov mint"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.6-2 1.6-2-1.6L10 21l-2-1.6L6 21z"/><path d="M9.5 8.5h5M9.5 12h5"/></svg></div><div class="v">$1,773.74</div><div class="l">Monthly bills</div></div>
-      <div class="ov butter"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div><div class="v">$1,918.06</div><div class="l">Savings target / mo</div></div>
-    </div>
-
-    <div class="shead"><h3>Recent Activity</h3><button id="raAll">View all</button></div>
-    <div class="card" id="homeTxns"></div>
-    <div class="footnote">Snapshot from 2026 statements. Card months follow statement periods. July's spike is two large cash withdrawals.</div>
   </section>
 
   <!-- ============ ACTIVITY ============ -->
@@ -378,7 +438,13 @@ const ICONS={
  music:IC('<path d="M9 18V6l10-2v11"/><circle cx="6.8" cy="18" r="2.4"/><circle cx="16.8" cy="15" r="2.4"/>'),
  drop:IC('<path d="M12 3.5c3.5 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.5-6.8 6-11z"/>'),
  cash:IC('<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.5v.01M18 14.5v.01"/>'),
- pay:IC('<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 14.5l2 2 4-4.5"/>')
+ pay:IC('<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 14.5l2 2 4-4.5"/>'),
+ home:IC('<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>'),
+ act:IC('<path d="M3 12h4l3 8 4-16 3 8h4"/>'),
+ bank:IC('<path d="M3 9.5L12 4l9 5.5M5.5 10v8M10 10v8M14 10v8M18.5 10v8M3 20h18"/>'),
+ user:IC('<circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.4 7-5.4s5.6 1.8 7 5.4"/>'),
+ grid:IC('<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>'),
+ bell:IC('<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 0 0 4 0"/>')
 };
 
 /* ---------- tabs ---------- */
@@ -406,14 +472,19 @@ function closeSheet(){
 }
 $('#scrim').addEventListener('click',closeSheet);
 
-/* ---------- home: chips ---------- */
-$('#acctChips').innerHTML=ACCTS.map((a,i)=>
-  `<button class="chip${i===0?' on':''}" data-i="${i}">${a.n} <b>${fmt(a.b)}</b></button>`).join('');
-$$('#acctChips .chip').forEach(c=>c.addEventListener('click',()=>{
-  $$('#acctChips .chip').forEach(x=>x.classList.remove('on')); c.classList.add('on');
-  const a=ACCTS[+c.dataset.i];
-  toast(a.n+': '+fmt(a.b)+' · '+a.s);
+/* ---------- home: account circles ---------- */
+const SHORT_ACCTS=[
+ {n:'Checking',short:'$60',bank:3},
+ {n:'Savings',short:'$708',bank:2},
+ {n:'Locked',short:'$3.5k',bank:1}
+];
+$('#acc4').innerHTML=SHORT_ACCTS.map((a,i)=>
+  `<button class="accc" data-i="${i}"><span class="c">${a.short}</span><span class="n">${a.n}</span></button>`).join('')+
+  `<button class="accc add" id="accAdd"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="n">Add</span></button>`;
+$$('#acc4 .accc[data-i]').forEach(c=>c.addEventListener('click',()=>{
+  openBank(SHORT_ACCTS[+c.dataset.i].bank);
 }));
+$('#accAdd').addEventListener('click',addSheet);
 
 /* ---------- home: txns ---------- */
 function txnRow(x){
@@ -422,17 +493,23 @@ function txnRow(x){
     <div><div class="tn">${x.n}</div><div class="ts">${x.s}</div></div>
     <div class="ta ${x.t}">${x.t==='in'?'+':'−'}${fmt(x.a).slice(1)}</div></div>`;
 }
-$('#homeTxns').innerHTML=TXNS.slice(0,6).map(txnRow).join('');
+$('#homeTxns').innerHTML=TXNS.slice(0,5).map(x=>`<div class="txncard">${txnRow(x)}</div>`).join('');
 $('#actTxns').innerHTML=TXNS.map(txnRow).join('');
 $$('.txn').forEach(r=>r.addEventListener('click',()=>toast(r.dataset.n+' — from your August statements')));
 $('#raAll').addEventListener('click',()=>goTab('t-activity'));
 
-/* ---------- overviews: view all -> bills sheet ---------- */
-$('#ovAll').addEventListener('click',()=>{
-  openSheet(`<h3>Monthly bills</h3><p class="ssub">$1,773.74 · statement-checked</p>`+
-    BILLS.map(b=>`<div class="kv"><span class="k">${b[0]}<br><small>${b[1]}</small></span><span class="v">${b[1].match(/\$[\d,.]+/)?b[1].match(/\$[\d,.]+/)[0]:''}</span></div>`).join('')+
-    `<button class="bigbtn btn-lime" onclick="closeSheet()">Done</button>`);
-});
+/* ---------- menu sheet ---------- */
+function openMenu(){
+  const rows=[['home','Home','t-home'],['act','Activity','t-activity'],['bank','Banking','t-banking'],['user','Account','t-account']];
+  openSheet(`<h3>Menu</h3><p class="ssub">Finance · static snapshot</p>`+
+    rows.map(r=>`<div class="mrow" data-t="${r[2]}"><span class="mi">${ICONS[r[0]]}</span><span>${r[1]}</span><span class="chev">›</span></div>`).join('')+
+    `<div class="mrow" id="mAlerts"><span class="mi">${ICONS.bell}</span><div><div>Alerts</div><div class="ms">3 items</div></div><span class="chev">›</span></div>`);
+  $$('#sheetBody .mrow[data-t]').forEach(r=>r.addEventListener('click',()=>{closeSheet();goTab(r.dataset.t);}));
+  $('#mAlerts').addEventListener('click',openAlerts);
+}
+$('#menuBtn').addEventListener('click',openMenu);
+$('#midBtn').addEventListener('click',()=>goTab('t-activity'));
+$('#incGo').addEventListener('click',()=>goTab('t-activity'));
 $('#billRows').innerHTML=BILLS.map(b=>{
   const m=b[1].match(/\$[\d,.]+/);
   return `<div class="kv"><span class="k">${b[0]}</span><span class="v">${m?m[0]:b[1]}</span></div>`;
@@ -529,7 +606,7 @@ $('#wdBtn').addEventListener('click',()=>{
 });
 
 /* ---------- alerts ---------- */
-$('#bellBtn').addEventListener('click',()=>{
+function openAlerts(){
   openSheet(`<h3>Alerts</h3><p class="ssub">From your statements &amp; plan</p>
   <div class="alert"><div class="adot" style="background:#1d8a4c"></div>
     <div><div class="at">GR86 payment on track</div><div class="as">$545.74 / mo at 6.24% APR · $33,770.19 owed as of Aug 31.</div></div></div>
@@ -538,7 +615,8 @@ $('#bellBtn').addEventListener('click',()=>{
   <div class="alert"><div class="adot" style="background:#e0a92e"></div>
     <div><div class="at">September savings at 43%</div><div class="as">$833 of $1,918.06 saved — $1,085.06 to go.</div></div></div>
   <button class="bigbtn btn-pale" onclick="closeSheet()">Close</button>`);
-});
+}
+$('#bellBtn').addEventListener('click',openAlerts);
 
 /* ---------- banking ---------- */
 $('#bankList').innerHTML=BANKS.map((b,i)=>
@@ -547,12 +625,25 @@ $('#bankList').innerHTML=BANKS.map((b,i)=>
     <div class="bnum">${b.num}</div>
     <div class="bbal">${fmt(b.b)}</div>
     <div class="bmeta">Tap for details</div></div>`).join('');
-$$('#bankList .bank').forEach(el=>el.addEventListener('click',()=>{
-  const b=BANKS[+el.dataset.i];
+function openBank(i){
+  const b=BANKS[i];
   openSheet(`<h3>${b.n}</h3><p class="ssub">${b.num}</p>`+
     b.rows.map(r=>`<div class="kv"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')+
     `<button class="bigbtn btn-lime" onclick="closeSheet()">Done</button>`);
-}));
+}
+$$('#bankList .bank').forEach(el=>el.addEventListener('click',()=>openBank(+el.dataset.i)));
+
+/* ---------- home mini income chart ---------- */
+(function(){
+  const data=MO_IN, mx=Math.max(...data);
+  const pts=data.map((v,i)=>`${(i/(data.length-1)*200).toFixed(1)},${(62-v/mx*56).toFixed(1)}`).join(' ');
+  $('#minichart').innerHTML=
+    `<defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1">`+
+    `<stop offset="0" stop-color="#5da32e" stop-opacity=".35"/><stop offset="1" stop-color="#5da32e" stop-opacity=".03"/>`+
+    `</linearGradient></defs>`+
+    `<polygon points="0,64 ${pts} 200,64" fill="url(#mg)"/>`+
+    `<polyline points="${pts}" fill="none" stroke="#5da32e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+})();
 </script>
 </body>
 </html>
