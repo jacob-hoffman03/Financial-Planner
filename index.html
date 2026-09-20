@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finance</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Finance">
+<meta name="theme-color" content="#5b5bf0">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-512.png">
+<style>
+:root{
+  --bg:#f1f1f8; --card:#ffffff; --card2:#f5f5f7;
+  --acc:#5b5bf0; --acc-deep:#4a4ad6; --acc-soft:#e4e4fb;
+  --ink:#1b1b1f; --ink2:#6b6b76; --ink3:#9a9aa5;
+  --green:#1faa5c; --red:#e5484d; --amber:#e8930c;
+  --radius:20px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  background:var(--bg); color:var(--ink);
+  min-height:100vh; padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+.appbar{
+  position:sticky; top:0; z-index:10;
+  padding:calc(14px + env(safe-area-inset-top)) 20px 12px;
+  background:rgba(241,241,248,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+}
+.appbar .yr{font-size:12px; font-weight:700; letter-spacing:2px; color:var(--ink3); text-transform:uppercase;}
+.appbar h1{margin:2px 0 0; font-size:26px; font-weight:800; letter-spacing:-.3px;}
+main{padding:4px 16px 0; max-width:560px; margin:0 auto;}
+.tab{display:none;}
+.tab.active{display:block; animation:fade .18s ease;}
+@keyframes fade{from{opacity:.4; transform:translateY(4px);} to{opacity:1; transform:none;}}
+
+/* hero */
+.hero{
+  background:linear-gradient(135deg,var(--acc-deep),var(--acc) 60%,#7e7ef2);
+  border-radius:var(--radius); color:#fff;
+  padding:18px 20px 22px; margin-top:8px;
+  box-shadow:0 10px 28px rgba(91,91,240,.28);
+}
+.monthstrip{display:flex; gap:2px; margin-bottom:14px;}
+.monthstrip span{
+  flex:1; text-align:center; font-size:11px; font-weight:700; color:rgba(255,255,255,.55);
+  padding:6px 0; border-radius:99px;
+}
+.monthstrip span.now{background:rgba(255,255,255,.95); color:var(--acc-deep);}
+.hero h2{margin:0; font-size:15px; font-weight:700; opacity:.92;}
+.hero-row{display:flex; align-items:center; gap:18px; margin-top:10px;}
+.ring{position:relative; width:132px; height:132px; flex:none;}
+.ring svg{transform:rotate(-90deg);}
+.ring .pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:30px; font-weight:800;}
+.hero-nums .big{font-size:24px; font-weight:800;}
+.hero-nums .sub{font-size:13px; opacity:.85; margin-top:4px; line-height:1.45;}
+.hero-note{margin-top:12px; font-size:12px; opacity:.8; line-height:1.5;
+  border-top:1px solid rgba(255,255,255,.25); padding-top:10px;}
+
+/* cards */
+.cards3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
+.card{background:var(--card); border-radius:var(--radius); padding:14px; margin-top:12px;}
+.stat{background:var(--card); border-radius:16px; padding:12px 10px; text-align:center;}
+.stat .v{font-size:16px; font-weight:800; letter-spacing:-.2px;}
+.stat .l{font-size:10.5px; color:var(--ink2); margin-top:3px; line-height:1.3;}
+.card h3{margin:0 0 4px; font-size:16px; font-weight:800;}
+.card .sub{font-size:12.5px; color:var(--ink2); margin:0 0 10px; line-height:1.45;}
+
+.row{display:flex; align-items:center; justify-content:space-between;
+  padding:11px 2px; border-bottom:1px solid #eeeef3;}
+.row:last-child{border-bottom:none;}
+.row .name{font-size:14px; font-weight:600;}
+.row .tag{display:inline-block; font-size:10px; font-weight:800; letter-spacing:.6px;
+  text-transform:uppercase; color:var(--acc-deep); background:var(--acc-soft);
+  border-radius:99px; padding:3px 8px; margin-right:7px; vertical-align:1px;}
+.row .amt{font-size:14px; font-weight:700; font-variant-numeric:tabular-nums;}
+.row .meta{font-size:11.5px; color:var(--ink2); margin-top:2px;}
+.row .amt .per{font-weight:500; color:var(--ink3); font-size:11.5px;}
+.total-row{display:flex; justify-content:space-between; align-items:center;
+  padding:13px 2px 2px; font-weight:800; font-size:15px;}
+
+.stackbar{display:flex; height:14px; border-radius:99px; overflow:hidden; margin:10px 0 6px; background:#ececf1;}
+.stackbar i{display:block; height:100%;}
+.legend{display:flex; gap:14px; font-size:12px; color:var(--ink2); margin-top:6px;}
+.legend b{color:var(--ink);}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px;}
+
+.kv{display:flex; justify-content:space-between; padding:9px 2px; border-bottom:1px solid #eeeef3; font-size:13.5px;}
+.kv:last-child{border-bottom:none;}
+.kv .k{color:var(--ink2);}
+.kv .v{font-weight:700; font-variant-numeric:tabular-nums;}
+.pill{display:inline-block; font-size:11px; font-weight:800; border-radius:99px; padding:4px 10px;}
+.pill.green{background:#e3f5ea; color:var(--green);}
+.pill.amber{background:#fdf1dd; color:var(--amber);}
+.footnote{font-size:11.5px; color:var(--ink3); line-height:1.55; padding:14px 4px 0;}
+.footnote b{color:var(--ink2);}
+
+/* tab bar */
+.tabbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:20;
+  display:flex; background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid #e6e6ee;
+  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+}
+.tabbar button{
+  flex:1; border:none; background:none; font-family:inherit; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  font-size:10.5px; font-weight:600; color:var(--ink3); padding:4px 0;
+}
+.tabbar button .ic{width:24px; height:24px; border-radius:8px; display:flex;
+  align-items:center; justify-content:center; font-size:15px; background:var(--card2);}
+.tabbar button.on{color:var(--acc-deep);}
+.tabbar button.on .ic{background:var(--acc-soft);}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="yr">2026</div>
+  <h1>Financial Dashboard</h1>
+</div>
+
+<main>
+  <!-- OVERVIEW -->
+  <section class="tab active" id="tab-overview">
+    <div class="hero">
+      <div class="monthstrip">
+        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span class="now">Sep</span>
+      </div>
+      <h2>September savings</h2>
+      <div class="hero-row">
+        <div class="ring">
+          <svg width="132" height="132" viewBox="0 0 132 132">
+            <circle cx="66" cy="66" r="56" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="13"/>
+            <circle cx="66" cy="66" r="56" fill="none" stroke="#ffffff" stroke-width="13"
+              stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="200.6"/>
+          </svg>
+          <div class="pct">43%</div>
+        </div>
+        <div class="hero-nums">
+          <div class="big">$833 of $1,918</div>
+          <div class="sub">~$1,085 to go this month<br>to hit the savings target</div>
+        </div>
+      </div>
+      <div class="hero-note">September cert transfer is done. The $1,918/mo target = $830 into the 6-month certificate + $1,088.04 into emergency savings.</div>
+    </div>
+
+    <div class="cards3">
+      <div class="stat"><div class="v">$10,112</div><div class="l">Cash on hand<br>Aug 31</div></div>
+      <div class="stat"><div class="v">$33,588</div><div class="l">YTD net income<br>thru mid-Sep</div></div>
+      <div class="stat"><div class="v">$1,774</div><div class="l">Monthly bills<br>statement-checked</div></div>
+    </div>
+
+    <div class="card">
+      <h3>Where the cash sits</h3>
+      <p class="sub">SchoolsFirst, end of August 2026.</p>
+      <div class="kv"><span class="k">Locked savings</span><span class="v">$3,505.18</span></div>
+      <div class="kv"><span class="k">6-month certificate · 3.90%</span><span class="v">$5,839.56</span></div>
+      <div class="kv"><span class="k">Regular savings</span><span class="v">$707.57</span></div>
+      <div class="kv"><span class="k">Checking</span><span class="v">$60.00</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Debts at a glance</h3>
+      <p class="sub">Everything is current. Cards are paid in full every month — $0 interest, $0 fees.</p>
+      <div class="kv"><span class="k">GR86 loan · 6.24%</span><span class="v">$33,770.19</span></div>
+      <div class="kv"><span class="k">SchoolsFirst card <span class="pill green">paid in full</span></span><span class="v">$6.99</span></div>
+      <div class="kv"><span class="k">Apple Card <span class="pill green">paid in full</span></span><span class="v">$49.91<span style="color:var(--ink3);font-weight:500">/mo</span></span></div>
+    </div>
+    <div class="footnote">Static snapshot from 2026 paystubs and statements. <b>Statements are truth</b> — where the planner disagreed, the statement number is shown.</div>
+  </section>
+
+  <!-- INCOME -->
+  <section class="tab" id="tab-income">
+    <div class="card">
+      <h3>2026 income · $33,587.98 net</h3>
+      <p class="sub">After payroll taxes, through mid-September. Tips arrive in hand; the net check looks small because taxes are withheld on already-paid tips.</p>
+      <div class="stackbar">
+        <i style="width:49.6%; background:linear-gradient(90deg,#5aa2ff,#2f6df6);"></i>
+        <i style="width:50.4%; background:linear-gradient(90deg,#7e7ef2,#a8a8ff);"></i>
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:#2f6df6"></span><b>TrulyPizza</b> $16,666</span>
+        <span><span class="dot" style="background:#7e7ef2"></span><b>aPizzaDoho</b> $16,922</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>TrulyPizza</h3>
+      <p class="sub">Server · TrulyLaguna LLC, Laguna Beach · $16.90/hr · started Apr 2026</p>
+      <div class="kv"><span class="k">YTD gross</span><span class="v">$20,575.52</span></div>
+      <div class="kv"><span class="k">YTD taxes</span><span class="v">$3,909.05</span></div>
+      <div class="kv"><span class="k">YTD tips</span><span class="v">$13,260.78</span></div>
+      <div class="kv"><span class="k">YTD net of tax</span><span class="v">$16,666.47</span></div>
+    </div>
+
+    <div class="card">
+      <h3>aPizzaDoho</h3>
+      <p class="sub">Expeditor · New Haven Apizza Doho, Dana Point · $17.00/hr · OT $25.50/hr</p>
+      <div class="kv"><span class="k">YTD gross</span><span class="v">$20,625.48</span></div>
+      <div class="kv"><span class="k">YTD taxes</span><span class="v">$3,703.97</span></div>
+      <div class="kv"><span class="k">YTD tips</span><span class="v">$9,249.00</span></div>
+      <div class="kv"><span class="k">YTD net of tax</span><span class="v">$16,921.51</span></div>
+    </div>
+
+    <div class="card">
+      <h3>aPizzaDoho W-2 history</h3>
+      <p class="sub">Box 1 wages by tax year.</p>
+      <div class="kv"><span class="k">2025</span><span class="v">$27,520.44</span></div>
+      <div class="kv"><span class="k">2024</span><span class="v">$20,204.77</span></div>
+      <div class="kv"><span class="k">2023</span><span class="v">$18,424.69</span></div>
+      <div class="kv"><span class="k">2022</span><span class="v">$4,316.10</span></div>
+    </div>
+    <div class="footnote">YTD average ≈ <b>$4,000/mo</b> net. September is running hotter on summer tips (~$5,400/mo pace).</div>
+  </section>
+
+  <!-- BILLS -->
+  <section class="tab" id="tab-bills">
+    <div class="card">
+      <h3>Monthly bills · $1,773.74</h3>
+      <p class="sub">Corrected from statements where they beat the planner. Gas and food are planner estimates.</p>
+      <div class="row"><div><span class="tag">Car</span><span class="name">GR86 loan</span><div class="meta">$545.74/mo · 6.24%</div></div><div class="amt">$545.74</div></div>
+      <div class="row"><div><span class="tag">Car</span><span class="name">State Farm insurance</span></div><div class="amt">$231.03</div></div>
+      <div class="row"><div><span class="tag">Car</span><span class="name">Gas</span><div class="meta">planner estimate</div></div><div class="amt">$200.00</div></div>
+      <div class="row"><div><span class="tag">Phone</span><span class="name">T-Mobile</span></div><div class="amt">$90.08</div></div>
+      <div class="row"><div><span class="tag">Life</span><span class="name">24 Hour Fitness</span></div><div class="amt">$29.99</div></div>
+      <div class="row"><div><span class="tag">Life</span><span class="name">ChatGPT</span><div class="meta">planner said $39.95 · statement says $20.00</div></div><div class="amt">$20.00</div></div>
+      <div class="row"><div><span class="tag">Life</span><span class="name">Spotify</span></div><div class="amt">$6.99</div></div>
+      <div class="row"><div><span class="tag">Life</span><span class="name">Food</span><div class="meta">planner estimate</div></div><div class="amt">$600.00</div></div>
+      <div class="row"><div><span class="tag">Apple</span><span class="name">Mac installment</span><div class="meta">planner said $108.16 · Apple Card says $49.91 · thru Jul 2027</div></div><div class="amt">$49.91</div></div>
+      <div class="total-row"><span>Total</span><span>$1,773.74<span class="per">/mo</span></span></div>
+    </div>
+    <div class="footnote">The planner's <b>$283.16/mo "Apple Credit Bill"</b> has no statement support — the Apple Card is paid in full monthly; only the $49.91 installment is real.</div>
+  </section>
+
+  <!-- SAVINGS -->
+  <section class="tab" id="tab-savings">
+    <div class="card">
+      <h3>Savings target · $1,918.06/mo</h3>
+      <p class="sub">The save-first number that keeps everything else on track.</p>
+      <div class="kv"><span class="k">6-month certificate</span><span class="v">$830.00</span></div>
+      <div class="kv"><span class="k">Emergency savings</span><span class="v">$1,088.04</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Savings buckets <span class="pill amber">Aug 31</span></h3>
+      <p class="sub">Where the saved money actually sits.</p>
+      <div class="kv"><span class="k">Locked savings</span><span class="v">$3,505.18</span></div>
+      <div class="kv"><span class="k">6-mo certificate · 3.90% APY</span><span class="v">$5,839.56</span></div>
+      <div class="row" style="border:none; padding-top:4px;"><div><span class="name" style="font-size:12.5px; font-weight:500; color:var(--ink2);">Matures Feb 20, 2027</span></div></div>
+      <div class="kv"><span class="k">Regular savings</span><span class="v">$707.57</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Debt payoff</h3>
+      <p class="sub">All current. No interest or fees paid on cards in 2026.</p>
+      <div class="row"><div><span class="name">GR86 auto loan</span><div class="meta">$33,770.19 owed · 6.24% APR · $545.74/mo</div></div></div>
+      <div class="row"><div><span class="name">SchoolsFirst credit card</span><div class="meta">$1,000 line · paid in full monthly</div></div><div><span class="pill green">$0 interest</span></div></div>
+      <div class="row"><div><span class="name">Apple Card</span><div class="meta">Paid in full monthly · Mac installment $49.91 thru Jul 2027</div></div><div><span class="pill green">$0 interest</span></div></div>
+    </div>
+    <div class="footnote">Snapshot built from 2026 paystubs, SchoolsFirst statements (thru Aug 31), and Apple Card statements (thru Aug 31).</div>
+  </section>
+</main>
+
+<nav class="tabbar">
+  <button data-tab="tab-overview" class="on"><span class="ic">◈</span>Overview</button>
+  <button data-tab="tab-income"><span class="ic">◍</span>Income</button>
+  <button data-tab="tab-bills"><span class="ic">▤</span>Bills</button>
+  <button data-tab="tab-savings"><span class="ic">⬢</span>Savings</button>
+</nav>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.tabbar button');
+  var tabs = document.querySelectorAll('.tab');
+  function show(id){
+    for (var i=0;i<tabs.length;i++) tabs[i].classList.toggle('active', tabs[i].id===id);
+    for (var j=0;j<btns.length;j++) btns[j].classList.toggle('on', btns[j].dataset.tab===id);
+    window.scrollTo(0,0);
+  }
+  for (var k=0;k<btns.length;k++){
+    btns[k].addEventListener('click', function(){ show(this.dataset.tab); });
+  }
+})();
+</script>
+</body>
+</html>
