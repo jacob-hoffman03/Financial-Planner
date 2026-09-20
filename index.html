@@ -8,285 +8,528 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Finance">
-<meta name="theme-color" content="#5b5bf0">
+<meta name="theme-color" content="#1f2e1b">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-512.png">
 <style>
 :root{
-  --bg:#f1f1f8; --card:#ffffff; --card2:#f5f5f7;
-  --acc:#5b5bf0; --acc-deep:#4a4ad6; --acc-soft:#e4e4fb;
-  --ink:#1b1b1f; --ink2:#6b6b76; --ink3:#9a9aa5;
-  --green:#1faa5c; --red:#e5484d; --amber:#e8930c;
-  --radius:20px;
+  --bg:#f1f1e8; --ink:#171717; --mut:#8e8e84; --line:#e7e7da;
+  --pine:#1f2e1b; --pine2:#2c4026; --lime:#d8f75f; --limedk:#a8c93a;
+  --card:#ffffff; --mint:#eaf6e1; --butter:#faf2da; --sky:#e8edf4; --rose:#fbe9e7;
+  --r:22px;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-html,body{margin:0; padding:0;}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
-  background:var(--bg); color:var(--ink);
-  min-height:100vh; padding-bottom:calc(96px + env(safe-area-inset-bottom));
-}
-.appbar{
-  position:sticky; top:0; z-index:10;
-  padding:calc(14px + env(safe-area-inset-top)) 20px 12px;
-  background:rgba(241,241,248,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-}
-.appbar .yr{font-size:12px; font-weight:700; letter-spacing:2px; color:var(--ink3); text-transform:uppercase;}
-.appbar h1{margin:2px 0 0; font-size:26px; font-weight:800; letter-spacing:-.3px;}
-main{padding:4px 16px 0; max-width:560px; margin:0 auto;}
-.tab{display:none;}
-.tab.active{display:block; animation:fade .18s ease;}
-@keyframes fade{from{opacity:.4; transform:translateY(4px);} to{opacity:1; transform:none;}}
+html,body{margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  background:var(--bg); color:var(--ink); min-height:100vh;
+  padding-bottom:calc(104px + env(safe-area-inset-bottom));}
+button{font-family:inherit;}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px;}
+.tab{display:none;} .tab.active{display:block;animation:fade .18s ease;}
+@keyframes fade{from{opacity:.35;transform:translateY(5px);}to{opacity:1;transform:none;}}
+
+/* top bar */
+.topbar{display:flex;align-items:center;justify-content:space-between;
+  padding:calc(16px + env(safe-area-inset-top)) 0 14px;}
+.who{display:flex;align-items:center;gap:11px;}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--pine);color:var(--lime);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;flex:none;}
+.who .hi{font-size:17px;font-weight:800;letter-spacing:-.2px;}
+.who .sub{font-size:12.5px;color:var(--mut);margin-top:1px;}
+.iconbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
 /* hero */
-.hero{
-  background:linear-gradient(135deg,var(--acc-deep),var(--acc) 60%,#7e7ef2);
-  border-radius:var(--radius); color:#fff;
-  padding:18px 20px 22px; margin-top:8px;
-  box-shadow:0 10px 28px rgba(91,91,240,.28);
-}
-.monthstrip{display:flex; gap:2px; margin-bottom:14px;}
-.monthstrip span{
-  flex:1; text-align:center; font-size:11px; font-weight:700; color:rgba(255,255,255,.55);
-  padding:6px 0; border-radius:99px;
-}
-.monthstrip span.now{background:rgba(255,255,255,.95); color:var(--acc-deep);}
-.hero h2{margin:0; font-size:15px; font-weight:700; opacity:.92;}
-.hero-row{display:flex; align-items:center; gap:18px; margin-top:10px;}
-.ring{position:relative; width:132px; height:132px; flex:none;}
-.ring svg{transform:rotate(-90deg);}
-.ring .pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-size:30px; font-weight:800;}
-.hero-nums .big{font-size:24px; font-weight:800;}
-.hero-nums .sub{font-size:13px; opacity:.85; margin-top:4px; line-height:1.45;}
-.hero-note{margin-top:12px; font-size:12px; opacity:.8; line-height:1.5;
-  border-top:1px solid rgba(255,255,255,.25); padding-top:10px;}
+.hero{position:relative;overflow:hidden;background:linear-gradient(140deg,#24351f,#1a2716 65%);
+  border-radius:26px;color:#fff;padding:22px 20px 20px;margin-top:2px;}
+.hero::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,247,95,.20),transparent 70%);top:-70px;right:-50px;}
+.hero::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,247,95,.12),transparent 70%);bottom:-60px;left:30px;}
+.hero .lbl{font-size:12.5px;color:#c9cdbd;position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;}
+.hero .asof{font-size:10.5px;font-weight:800;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:99px;letter-spacing:.4px;}
+.hero .bal{font-size:38px;font-weight:800;letter-spacing:-1px;margin:8px 0 2px;position:relative;z-index:1;font-variant-numeric:tabular-nums;}
+.hero .meta{font-size:12.5px;color:#c9cdbd;position:relative;z-index:1;}
+.hero .acts{display:flex;gap:10px;margin-top:16px;position:relative;z-index:1;}
+.hero .acts button{flex:1;border:none;border-radius:99px;padding:13px 0;font-size:14px;font-weight:700;cursor:pointer;}
+.btn-lime{background:var(--lime);color:#1c2a17;}
+.btn-pale{background:#eef1f6;color:#1c2a17;}
 
-/* cards */
-.cards3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
-.card{background:var(--card); border-radius:var(--radius); padding:14px; margin-top:12px;}
-.stat{background:var(--card); border-radius:16px; padding:12px 10px; text-align:center;}
-.stat .v{font-size:16px; font-weight:800; letter-spacing:-.2px;}
-.stat .l{font-size:10.5px; color:var(--ink2); margin-top:3px; line-height:1.3;}
-.card h3{margin:0 0 4px; font-size:16px; font-weight:800;}
-.card .sub{font-size:12.5px; color:var(--ink2); margin:0 0 10px; line-height:1.45;}
+/* chips */
+.chips{display:flex;gap:9px;overflow-x:auto;padding:14px 2px 4px;scrollbar-width:none;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{flex:none;background:var(--card);border:1px solid var(--line);border-radius:99px;
+  padding:9px 14px;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:pointer;}
+.chip b{font-weight:800;font-variant-numeric:tabular-nums;}
+.chip.on{background:var(--pine);color:#fff;border-color:var(--pine);}
+.chip.on b{color:var(--lime);}
 
-.row{display:flex; align-items:center; justify-content:space-between;
-  padding:11px 2px; border-bottom:1px solid #eeeef3;}
-.row:last-child{border-bottom:none;}
-.row .name{font-size:14px; font-weight:600;}
-.row .tag{display:inline-block; font-size:10px; font-weight:800; letter-spacing:.6px;
-  text-transform:uppercase; color:var(--acc-deep); background:var(--acc-soft);
-  border-radius:99px; padding:3px 8px; margin-right:7px; vertical-align:1px;}
-.row .amt{font-size:14px; font-weight:700; font-variant-numeric:tabular-nums;}
-.row .meta{font-size:11.5px; color:var(--ink2); margin-top:2px;}
-.row .amt .per{font-weight:500; color:var(--ink3); font-size:11.5px;}
-.total-row{display:flex; justify-content:space-between; align-items:center;
-  padding:13px 2px 2px; font-weight:800; font-size:15px;}
+/* section heads */
+.shead{display:flex;justify-content:space-between;align-items:baseline;margin:20px 2px 10px;}
+.shead h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.2px;}
+.shead button{border:none;background:none;color:var(--mut);font-size:13px;font-weight:600;cursor:pointer;}
 
-.stackbar{display:flex; height:14px; border-radius:99px; overflow:hidden; margin:10px 0 6px; background:#ececf1;}
-.stackbar i{display:block; height:100%;}
-.legend{display:flex; gap:14px; font-size:12px; color:var(--ink2); margin-top:6px;}
-.legend b{color:var(--ink);}
-.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px;}
+/* overview cards */
+.ov2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.ov{background:var(--card);border-radius:var(--r);padding:15px;}
+.ov.mint{background:var(--mint);} .ov.butter{background:var(--butter);}
+.ov .ic{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.75);
+  display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:10px;}
+.ov .v{font-size:19px;font-weight:800;letter-spacing:-.3px;font-variant-numeric:tabular-nums;}
+.ov .l{font-size:11.5px;color:var(--mut);margin-top:3px;font-weight:600;}
 
-.kv{display:flex; justify-content:space-between; padding:9px 2px; border-bottom:1px solid #eeeef3; font-size:13.5px;}
+/* txn rows */
+.card{background:var(--card);border-radius:var(--r);padding:6px 16px;}
+.txn{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f0f0e6;cursor:pointer;}
+.txn:last-child{border-bottom:none;}
+.txn .ti{width:44px;height:44px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.txn .tn{font-size:14.5px;font-weight:700;}
+.txn .ts{font-size:12px;color:var(--mut);margin-top:2px;}
+.txn .ta{margin-left:auto;font-size:14.5px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.txn .ta.out{color:var(--ink);} .txn .ta.in{color:#1d8a4c;}
+
+/* activity */
+.acard{background:var(--card);border-radius:var(--r);padding:18px 16px 14px;margin-top:14px;}
+.acard .lab{font-size:12.5px;color:var(--mut);font-weight:600;}
+.acard .big{font-size:30px;font-weight:800;letter-spacing:-.8px;margin:4px 0 2px;font-variant-numeric:tabular-nums;}
+.acard .per{font-size:12px;color:var(--mut);margin-bottom:10px;}
+.seg{display:inline-flex;background:#efefe4;border-radius:99px;padding:3px;margin-bottom:6px;}
+.seg button{border:none;background:none;border-radius:99px;padding:7px 16px;font-size:12.5px;font-weight:700;color:var(--mut);cursor:pointer;}
+.seg button.on{background:var(--pine);color:#fff;}
+#chart{width:100%;height:170px;display:block;margin-top:4px;}
+.iocards{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:11px;}
+.iocard{border-radius:18px;padding:14px;}
+.iocard .l{font-size:12px;font-weight:700;color:var(--mut);}
+.iocard .v{font-size:19px;font-weight:800;margin-top:5px;font-variant-numeric:tabular-nums;letter-spacing:-.3px;}
+.iocard .s{font-size:11px;color:var(--mut);margin-top:3px;}
+
+/* banking */
+.bank{background:var(--card);border-radius:var(--r);padding:16px;margin-top:11px;cursor:pointer;}
+.bank .bn{font-size:14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;}
+.bank .bn .chev{color:var(--mut);font-size:16px;}
+.bank .bnum{font-size:12px;color:var(--mut);margin-top:2px;letter-spacing:1px;}
+.bank .bbal{font-size:23px;font-weight:800;margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.4px;}
+.bank .bmeta{font-size:12px;color:var(--mut);margin-top:4px;}
+.bank.dark{background:linear-gradient(140deg,#263823,#182413);color:#fff;}
+.bank.dark .bnum,.bank.dark .bmeta{color:#b9bfae;}
+.bank.dark .chev{color:#b9bfae;}
+
+/* account */
+.prow{display:flex;align-items:center;gap:13px;margin-top:16px;}
+.prow .avatar{width:58px;height:58px;font-size:25px;}
+.kv{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f0f0e6;font-size:14px;}
 .kv:last-child{border-bottom:none;}
-.kv .k{color:var(--ink2);}
-.kv .v{font-weight:700; font-variant-numeric:tabular-nums;}
-.pill{display:inline-block; font-size:11px; font-weight:800; border-radius:99px; padding:4px 10px;}
-.pill.green{background:#e3f5ea; color:var(--green);}
-.pill.amber{background:#fdf1dd; color:var(--amber);}
-.footnote{font-size:11.5px; color:var(--ink3); line-height:1.55; padding:14px 4px 0;}
-.footnote b{color:var(--ink2);}
+.kv .k{color:var(--mut);} .kv .v{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;border-radius:99px;padding:4px 10px;letter-spacing:.3px;}
+.pill.g{background:#e2f4e5;color:#1d8a4c;} .pill.y{background:#fdf0d3;color:#b97c0f;} .pill.s{background:#eef0e6;color:#5c5c52;}
+.sect{background:var(--card);border-radius:var(--r);padding:6px 16px;margin-top:12px;}
+.sect h4{margin:10px 0 2px;font-size:15px;font-weight:800;}
+.footnote{font-size:11.5px;color:var(--mut);line-height:1.6;padding:16px 4px 0;}
+.bar{height:8px;border-radius:99px;background:#efefe4;overflow:hidden;margin-top:7px;}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--limedk),var(--lime));}
 
-/* tab bar */
-.tabbar{
-  position:fixed; left:0; right:0; bottom:0; z-index:20;
-  display:flex; background:rgba(255,255,255,.96);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-top:1px solid #e6e6ee;
-  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
-}
-.tabbar button{
-  flex:1; border:none; background:none; font-family:inherit; cursor:pointer;
-  display:flex; flex-direction:column; align-items:center; gap:3px;
-  font-size:10.5px; font-weight:600; color:var(--ink3); padding:4px 0;
-}
-.tabbar button .ic{width:24px; height:24px; border-radius:8px; display:flex;
-  align-items:center; justify-content:center; font-size:15px; background:var(--card2);}
-.tabbar button.on{color:var(--acc-deep);}
-.tabbar button.on .ic{background:var(--acc-soft);}
+/* tabbar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  display:flex;padding:10px 10px calc(12px + env(safe-area-inset-bottom));}
+.tabbar button{flex:1;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:4px;font-size:10.5px;font-weight:700;color:var(--mut);padding:6px 0;border-radius:14px;}
+.tabbar button .gi{font-size:20px;}
+.tabbar button.on{color:var(--ink);} .tabbar button.on .gi{background:var(--lime);border-radius:12px;padding:2px 10px;}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(20,25,18,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:50;}
+.scrim.show{opacity:1;pointer-events:auto;}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;background:#fff;border-radius:26px 26px 0 0;
+  max-width:560px;margin:0 auto;max-height:86vh;overflow-y:auto;padding:10px 20px calc(22px + env(safe-area-inset-bottom));
+  transform:translateY(105%);transition:transform .3s cubic-bezier(.32,.72,.35,1);}
+.sheet.show{transform:none;}
+.grab{width:44px;height:5px;border-radius:99px;background:#e2e2d6;margin:6px auto 12px;}
+.sheet h3{margin:2px 0;font-size:20px;font-weight:800;letter-spacing:-.3px;}
+.sheet .ssub{font-size:13px;color:var(--mut);margin:0 0 14px;}
+.amtgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+.amtgrid button{border:2px solid var(--line);background:#fbfbF6;border-radius:16px;padding:14px 0;
+  font-size:16px;font-weight:800;cursor:pointer;font-variant-numeric:tabular-nums;}
+.amtgrid button.on{border-color:var(--pine);background:var(--pine);color:#fff;}
+.destrow{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid #f0f0e6;cursor:pointer;}
+.destrow .radio{width:22px;height:22px;border-radius:50%;border:2px solid #d5d5c8;flex:none;display:flex;align-items:center;justify-content:center;}
+.destrow.on .radio{border-color:var(--pine);}
+.destrow.on .radio::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--pine);}
+.destrow .dn{font-size:14.5px;font-weight:700;} .destrow .ds{font-size:12px;color:var(--mut);}
+.destrow .da{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums;}
+.projbox{background:var(--mint);border-radius:18px;padding:15px;margin:14px 0;font-size:13.5px;line-height:1.65;}
+.projbox b{font-variant-numeric:tabular-nums;}
+.bigbtn{width:100%;border:none;border-radius:99px;padding:16px;font-size:15.5px;font-weight:800;cursor:pointer;margin-top:6px;}
+.alert{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0f0e6;align-items:flex-start;}
+.alert:last-child{border:none;}
+.alert .adot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:none;}
+.alert .at{font-size:14px;font-weight:700;} .alert .as{font-size:12.5px;color:var(--mut);margin-top:2px;line-height:1.5;}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(110px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
+  background:var(--pine);color:#fff;font-size:13.5px;font-weight:600;padding:13px 20px;border-radius:99px;
+  opacity:0;pointer-events:none;transition:all .25s;z-index:60;max-width:88vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%);}
 </style>
 </head>
 <body>
-<div class="appbar">
-  <div class="yr">2026</div>
-  <h1>Financial Dashboard</h1>
-</div>
+<div class="wrap">
 
-<main>
-  <!-- OVERVIEW -->
-  <section class="tab active" id="tab-overview">
+  <!-- ============ HOME ============ -->
+  <section class="tab active" id="t-home">
+    <div class="topbar">
+      <div class="who">
+        <div class="avatar">J</div>
+        <div><div class="hi">Hi Jay</div><div class="sub">Welcome to your wallet</div></div>
+      </div>
+      <button class="iconbtn" id="bellBtn" aria-label="Alerts">🔔</button>
+    </div>
+
     <div class="hero">
-      <div class="monthstrip">
-        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span class="now">Sep</span>
-      </div>
-      <h2>September savings</h2>
-      <div class="hero-row">
-        <div class="ring">
-          <svg width="132" height="132" viewBox="0 0 132 132">
-            <circle cx="66" cy="66" r="56" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="13"/>
-            <circle cx="66" cy="66" r="56" fill="none" stroke="#ffffff" stroke-width="13"
-              stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="200.6"/>
-          </svg>
-          <div class="pct">43%</div>
-        </div>
-        <div class="hero-nums">
-          <div class="big">$833 of $1,918</div>
-          <div class="sub">~$1,085 to go this month<br>to hit the savings target</div>
-        </div>
-      </div>
-      <div class="hero-note">September cert transfer is done. The $1,918/mo target = $830 into the 6-month certificate + $1,088.04 into emergency savings.</div>
-    </div>
-
-    <div class="cards3">
-      <div class="stat"><div class="v">$10,112</div><div class="l">Cash on hand<br>Aug 31</div></div>
-      <div class="stat"><div class="v">$33,588</div><div class="l">YTD net income<br>thru mid-Sep</div></div>
-      <div class="stat"><div class="v">$1,774</div><div class="l">Monthly bills<br>statement-checked</div></div>
-    </div>
-
-    <div class="card">
-      <h3>Where the cash sits</h3>
-      <p class="sub">SchoolsFirst, end of August 2026.</p>
-      <div class="kv"><span class="k">Locked savings</span><span class="v">$3,505.18</span></div>
-      <div class="kv"><span class="k">6-month certificate · 3.90%</span><span class="v">$5,839.56</span></div>
-      <div class="kv"><span class="k">Regular savings</span><span class="v">$707.57</span></div>
-      <div class="kv"><span class="k">Checking</span><span class="v">$60.00</span></div>
-    </div>
-
-    <div class="card">
-      <h3>Debts at a glance</h3>
-      <p class="sub">Everything is current. Cards are paid in full every month — $0 interest, $0 fees.</p>
-      <div class="kv"><span class="k">GR86 loan · 6.24%</span><span class="v">$33,770.19</span></div>
-      <div class="kv"><span class="k">SchoolsFirst card <span class="pill green">paid in full</span></span><span class="v">$6.99</span></div>
-      <div class="kv"><span class="k">Apple Card <span class="pill green">paid in full</span></span><span class="v">$49.91<span style="color:var(--ink3);font-weight:500">/mo</span></span></div>
-    </div>
-    <div class="footnote">Static snapshot from 2026 paystubs and statements. <b>Statements are truth</b> — where the planner disagreed, the statement number is shown.</div>
-  </section>
-
-  <!-- INCOME -->
-  <section class="tab" id="tab-income">
-    <div class="card">
-      <h3>2026 income · $33,587.98 net</h3>
-      <p class="sub">After payroll taxes, through mid-September. Tips arrive in hand; the net check looks small because taxes are withheld on already-paid tips.</p>
-      <div class="stackbar">
-        <i style="width:49.6%; background:linear-gradient(90deg,#5aa2ff,#2f6df6);"></i>
-        <i style="width:50.4%; background:linear-gradient(90deg,#7e7ef2,#a8a8ff);"></i>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:#2f6df6"></span><b>TrulyPizza</b> $16,666</span>
-        <span><span class="dot" style="background:#7e7ef2"></span><b>aPizzaDoho</b> $16,922</span>
+      <div class="lbl"><span>Cash balance</span><span class="asof">AUG 31</span></div>
+      <div class="bal">$10,112.31</div>
+      <div class="meta">4 accounts · SchoolsFirst</div>
+      <div class="acts">
+        <button class="btn-lime" id="addBtn">＋ Add Money</button>
+        <button class="btn-pale" id="wdBtn">⇅ Withdraw</button>
       </div>
     </div>
 
-    <div class="card">
-      <h3>TrulyPizza</h3>
-      <p class="sub">Server · TrulyLaguna LLC, Laguna Beach · $16.90/hr · started Apr 2026</p>
-      <div class="kv"><span class="k">YTD gross</span><span class="v">$20,575.52</span></div>
-      <div class="kv"><span class="k">YTD taxes</span><span class="v">$3,909.05</span></div>
-      <div class="kv"><span class="k">YTD tips</span><span class="v">$13,260.78</span></div>
-      <div class="kv"><span class="k">YTD net of tax</span><span class="v">$16,666.47</span></div>
+    <div class="chips" id="acctChips"></div>
+
+    <div class="shead"><h3>Overviews</h3><button id="ovAll">View all</button></div>
+    <div class="ov2">
+      <div class="ov mint"><div class="ic">🧾</div><div class="v">$1,773.74</div><div class="l">Monthly bills</div></div>
+      <div class="ov butter"><div class="ic">🎯</div><div class="v">$1,918.06</div><div class="l">Savings target / mo</div></div>
     </div>
 
-    <div class="card">
-      <h3>aPizzaDoho</h3>
-      <p class="sub">Expeditor · New Haven Apizza Doho, Dana Point · $17.00/hr · OT $25.50/hr</p>
-      <div class="kv"><span class="k">YTD gross</span><span class="v">$20,625.48</span></div>
-      <div class="kv"><span class="k">YTD taxes</span><span class="v">$3,703.97</span></div>
-      <div class="kv"><span class="k">YTD tips</span><span class="v">$9,249.00</span></div>
-      <div class="kv"><span class="k">YTD net of tax</span><span class="v">$16,921.51</span></div>
-    </div>
-
-    <div class="card">
-      <h3>aPizzaDoho W-2 history</h3>
-      <p class="sub">Box 1 wages by tax year.</p>
-      <div class="kv"><span class="k">2025</span><span class="v">$27,520.44</span></div>
-      <div class="kv"><span class="k">2024</span><span class="v">$20,204.77</span></div>
-      <div class="kv"><span class="k">2023</span><span class="v">$18,424.69</span></div>
-      <div class="kv"><span class="k">2022</span><span class="v">$4,316.10</span></div>
-    </div>
-    <div class="footnote">YTD average ≈ <b>$4,000/mo</b> net. September is running hotter on summer tips (~$5,400/mo pace).</div>
+    <div class="shead"><h3>Recent Activity</h3><button id="raAll">View all</button></div>
+    <div class="card" id="homeTxns"></div>
+    <div class="footnote">Snapshot from 2026 statements. Card months follow statement periods. July's spike is two large cash withdrawals.</div>
   </section>
 
-  <!-- BILLS -->
-  <section class="tab" id="tab-bills">
-    <div class="card">
-      <h3>Monthly bills · $1,773.74</h3>
-      <p class="sub">Corrected from statements where they beat the planner. Gas and food are planner estimates.</p>
-      <div class="row"><div><span class="tag">Car</span><span class="name">GR86 loan</span><div class="meta">$545.74/mo · 6.24%</div></div><div class="amt">$545.74</div></div>
-      <div class="row"><div><span class="tag">Car</span><span class="name">State Farm insurance</span></div><div class="amt">$231.03</div></div>
-      <div class="row"><div><span class="tag">Car</span><span class="name">Gas</span><div class="meta">planner estimate</div></div><div class="amt">$200.00</div></div>
-      <div class="row"><div><span class="tag">Phone</span><span class="name">T-Mobile</span></div><div class="amt">$90.08</div></div>
-      <div class="row"><div><span class="tag">Life</span><span class="name">24 Hour Fitness</span></div><div class="amt">$29.99</div></div>
-      <div class="row"><div><span class="tag">Life</span><span class="name">ChatGPT</span><div class="meta">planner said $39.95 · statement says $20.00</div></div><div class="amt">$20.00</div></div>
-      <div class="row"><div><span class="tag">Life</span><span class="name">Spotify</span></div><div class="amt">$6.99</div></div>
-      <div class="row"><div><span class="tag">Life</span><span class="name">Food</span><div class="meta">planner estimate</div></div><div class="amt">$600.00</div></div>
-      <div class="row"><div><span class="tag">Apple</span><span class="name">Mac installment</span><div class="meta">planner said $108.16 · Apple Card says $49.91 · thru Jul 2027</div></div><div class="amt">$49.91</div></div>
-      <div class="total-row"><span>Total</span><span>$1,773.74<span class="per">/mo</span></span></div>
+  <!-- ============ ACTIVITY ============ -->
+  <section class="tab" id="t-activity">
+    <div class="topbar">
+      <div class="who">
+        <div class="avatar">J</div>
+        <div><div class="hi">Your Activity</div><div class="sub">Money in &amp; out</div></div>
+      </div>
     </div>
-    <div class="footnote">The planner's <b>$283.16/mo "Apple Credit Bill"</b> has no statement support — the Apple Card is paid in full monthly; only the $49.91 installment is real.</div>
+    <div class="acard">
+      <div class="lab">Total out</div>
+      <div class="big" id="totOut">$4,962.55</div>
+      <div class="per" id="totPer">August 2026 · from statements</div>
+      <div class="seg" id="seg">
+        <button data-v="day" class="on">Day</button><button data-v="week">Week</button><button data-v="month">Month</button>
+      </div>
+      <svg id="chart" viewBox="0 0 340 170" preserveAspectRatio="none"></svg>
+    </div>
+    <div class="iocards">
+      <div class="iocard" style="background:var(--mint)"><div class="l">Money in</div><div class="v" id="inV">$15,249.62</div><div class="s" id="inS">August 2026</div></div>
+      <div class="iocard" style="background:var(--butter)"><div class="l">Money out</div><div class="v" id="outV">$4,962.55</div><div class="s" id="outS">August 2026</div></div>
+    </div>
+    <div class="shead"><h3>Recent Transaction</h3></div>
+    <div class="card" id="actTxns"></div>
+    <div class="footnote">"Money in" counts deposits and transfers the statement doesn't label as internal. Card months follow statement periods.</div>
   </section>
 
-  <!-- SAVINGS -->
-  <section class="tab" id="tab-savings">
-    <div class="card">
-      <h3>Savings target · $1,918.06/mo</h3>
-      <p class="sub">The save-first number that keeps everything else on track.</p>
-      <div class="kv"><span class="k">6-month certificate</span><span class="v">$830.00</span></div>
-      <div class="kv"><span class="k">Emergency savings</span><span class="v">$1,088.04</span></div>
+  <!-- ============ BANKING ============ -->
+  <section class="tab" id="t-banking">
+    <div class="topbar">
+      <div class="who">
+        <div class="avatar">J</div>
+        <div><div class="hi">Banking</div><div class="sub">Accounts &amp; debts</div></div>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>Savings buckets <span class="pill amber">Aug 31</span></h3>
-      <p class="sub">Where the saved money actually sits.</p>
-      <div class="kv"><span class="k">Locked savings</span><span class="v">$3,505.18</span></div>
-      <div class="kv"><span class="k">6-mo certificate · 3.90% APY</span><span class="v">$5,839.56</span></div>
-      <div class="row" style="border:none; padding-top:4px;"><div><span class="name" style="font-size:12.5px; font-weight:500; color:var(--ink2);">Matures Feb 20, 2027</span></div></div>
-      <div class="kv"><span class="k">Regular savings</span><span class="v">$707.57</span></div>
-    </div>
-
-    <div class="card">
-      <h3>Debt payoff</h3>
-      <p class="sub">All current. No interest or fees paid on cards in 2026.</p>
-      <div class="row"><div><span class="name">GR86 auto loan</span><div class="meta">$33,770.19 owed · 6.24% APR · $545.74/mo</div></div></div>
-      <div class="row"><div><span class="name">SchoolsFirst credit card</span><div class="meta">$1,000 line · paid in full monthly</div></div><div><span class="pill green">$0 interest</span></div></div>
-      <div class="row"><div><span class="name">Apple Card</span><div class="meta">Paid in full monthly · Mac installment $49.91 thru Jul 2027</div></div><div><span class="pill green">$0 interest</span></div></div>
-    </div>
-    <div class="footnote">Snapshot built from 2026 paystubs, SchoolsFirst statements (thru Aug 31), and Apple Card statements (thru Aug 31).</div>
+    <div id="bankList"></div>
+    <div class="footnote">Tap any card for details. Balances are the Aug 31, 2026 statement snapshot.</div>
   </section>
-</main>
+
+  <!-- ============ ACCOUNT ============ -->
+  <section class="tab" id="t-account">
+    <div class="topbar">
+      <div class="who">
+        <div class="avatar">J</div>
+        <div><div class="hi">Jay Hoffman</div><div class="sub">Dana Point, CA</div></div>
+      </div>
+    </div>
+
+    <div class="sect">
+      <h4>September savings</h4>
+      <div class="kv"><span class="k">Saved so far</span><span class="v">$833.00</span></div>
+      <div class="kv"><span class="k">Monthly target</span><span class="v">$1,918.06</span></div>
+      <div class="bar"><i style="width:43%"></i></div>
+      <div class="kv"><span class="k">Still to go</span><span class="v">$1,085.06</span></div>
+    </div>
+
+    <div class="sect">
+      <h4>Monthly bills <span class="pill s" style="margin-left:6px">$1,773.74</span></h4>
+      <div id="billRows"></div>
+    </div>
+
+    <div class="sect">
+      <h4>Work · 2026 year-to-date</h4>
+      <div class="kv"><span class="k">TrulyPizza net</span><span class="v">$16,666.47</span></div>
+      <div class="kv"><span class="k">aPizzaDoho net</span><span class="v">$16,921.51</span></div>
+      <div class="kv"><span class="k">Combined net</span><span class="v">$33,587.98</span></div>
+      <div class="kv"><span class="k">Tips reported</span><span class="v">$22,509.78</span></div>
+    </div>
+
+    <div class="footnote">Finance · static snapshot · v2026.09.19-b<br>Built from your 2026 paystubs &amp; statements. No data leaves this page.</div>
+  </section>
+
+</div><!-- /wrap -->
 
 <nav class="tabbar">
-  <button data-tab="tab-overview" class="on"><span class="ic">◈</span>Overview</button>
-  <button data-tab="tab-income"><span class="ic">◍</span>Income</button>
-  <button data-tab="tab-bills"><span class="ic">▤</span>Bills</button>
-  <button data-tab="tab-savings"><span class="ic">⬢</span>Savings</button>
+  <button data-t="t-home" class="on"><span class="gi">⌂</span>Home</button>
+  <button data-t="t-activity"><span class="gi">∿</span>Activity</button>
+  <button data-t="t-banking"><span class="gi">▤</span>Banking</button>
+  <button data-t="t-account"><span class="gi">◉</span>Account</button>
 </nav>
 
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet"><div class="grab"></div><div id="sheetBody"></div></div>
+<div class="toast" id="toast"></div>
+
 <script>
-(function(){
-  var btns = document.querySelectorAll('.tabbar button');
-  var tabs = document.querySelectorAll('.tab');
-  function show(id){
-    for (var i=0;i<tabs.length;i++) tabs[i].classList.toggle('active', tabs[i].id===id);
-    for (var j=0;j<btns.length;j++) btns[j].classList.toggle('on', btns[j].dataset.tab===id);
-    window.scrollTo(0,0);
+"use strict";
+/* ---------------- data (from 2026 statements) ---------------- */
+const MO_OUT=[3849.90,3662.38,3219.73,3926.40,5248.28,7125.45,13577.21,4975.78];
+const MO_IN =[5642.04,2615.60,2926.13,4117.92,6694.56,12134.89,6584.63,15249.62];
+const MO_LBL=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+const DAY=[43.53,112.70,173.30,77.89,21.49,231.24,0,0,46.75,28.85,0,127.99,0,1000.00,19.95,90.09,545.74,318.97,0,0,0,228.02,0,404.78,962.37,6.00,330.95,0,0,187.44,4.50];
+const WEEK=[660.15,1203.59,974.75,1932.12,191.94];
+const WEEK_LBL=['W1','W2','W3','W4','W5'];
+const AUG_OUT=4962.55, AUG_IN=15249.62;
+const MO_OUT_TOT=MO_OUT.reduce((a,b)=>a+b,0), MO_IN_TOT=MO_IN.reduce((a,b)=>a+b,0);
+
+const ACCTS=[
+ {n:'Checking',b:60.00,s:'Share 01'},
+ {n:'Savings',b:707.57,s:'Share 71 · 0.10% APY'},
+ {n:'Locked savings',b:3505.18,s:'Share 04 · opened Aug 17'},
+ {n:'6-mo certificate',b:5839.56,s:'Share 40 · 3.90% APY · matures Feb 20, 2027'}
+];
+const TXNS=[
+ {e:'🚗',n:'State Farm Insurance',s:'Aug 22 · auto',a:228.02,t:'out'},
+ {e:'🛒',n:'Target · San Clemente',s:'Aug 30 · debit',a:187.44,t:'out'},
+ {e:'📱',n:'T-Mobile Auto Pay',s:'Aug 16 · card',a:90.09,t:'out'},
+ {e:'🅿️',n:'Citation / permits',s:'Aug 18 · debit',a:57.50,t:'out'},
+ {e:'💪',n:'24 Hour Fitness',s:'Aug 18 · card',a:29.99,t:'out'},
+ {e:'🤖',n:'ChatGPT',s:'Aug 25 · card',a:20.00,t:'out'},
+ {e:'📚',n:'QuillBot',s:'Aug 15 · card',a:19.95,t:'out'},
+ {e:'🎵',n:'Spotify',s:'Aug 2 · card',a:6.99,t:'out'},
+ {e:'🚗',n:'Mission Viejo Car Wash',s:'Aug 31 · debit',a:4.50,t:'out'},
+ {e:'💵',n:'ATM deposit · tips',s:'Aug 16 · SchoolsFirst',a:384.00,t:'in'},
+ {e:'💵',n:'ATM deposit · tips',s:'Aug 2 · SchoolsFirst',a:330.00,t:'in'},
+ {e:'🧾',n:'aPizzaDoho payroll',s:'Aug 14 · ACH',a:280.66,t:'in'}
+];
+const BILLS=[
+ ['Toyota GR86 loan','Car · $545.74'],
+ ['State Farm insurance','Car · $231.03'],
+ ['Gas','Car · ~$200.00'],
+ ['Food','Lifestyle · ~$600.00'],
+ ['T-Mobile','Phone · $90.08'],
+ ['24 Hour Fitness','Lifestyle · $29.99'],
+ ['ChatGPT','Lifestyle · $20.00'],
+ ['Spotify','Lifestyle · $6.99'],
+ ['Mac installment','Apple · $49.91']
+];
+const BANKS=[
+ {n:'6-Month Certificate',num:'Share 40',b:5839.56,dark:true,rows:[
+   ['Balance','$5,839.56'],['APY','3.90%'],['Opened','Aug 20, 2026'],['Matures','Feb 20, 2027'],['Auto savings deposit','$830.00 / mo']]},
+ {n:'Locked Savings',num:'Share 04',b:3505.18,dark:true,rows:[
+   ['Balance','$3,505.18'],['Opened','Aug 17, 2026'],['Auto savings deposit','$1,088.04 / mo']]},
+ {n:'Regular Savings',num:'Share 71',b:707.57,rows:[
+   ['Balance','$707.57'],['Dividend rate','0.10% APY'],['As of','Aug 31, 2026']]},
+ {n:'Checking',num:'Share 01',b:60.00,rows:[
+   ['Balance','$60.00'],['As of','Aug 31, 2026']]},
+ {n:'SchoolsFirst Credit Card',num:'···· 7861',b:6.99,rows:[
+   ['Statement balance','$6.99'],['Credit line','$1,000'],['Interest / fees','$0.00 — paid in full monthly'],['Statement date','Sep 7, 2026']]},
+ {n:'Apple Card',num:'Apple',b:49.91,rows:[
+   ['Monthly installment','$49.91'],['Installments left','$549.09 total'],['Interest','$0 — paid in full monthly'],['Statement','Aug 31, 2026']]},
+ {n:'Toyota GR86 Loan',num:'Loan 01',b:33770.19,rows:[
+   ['Owed','$33,770.19'],['APR','6.24%'],['Payment','$545.74 / mo'],['As of','Aug 31, 2026']]}
+];
+</script>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+/* ---------- tabs ---------- */
+function goTab(id){
+  $$('.tab').forEach(t=>t.classList.toggle('active',t.id===id));
+  $$('.tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));
+  window.scrollTo({top:0});
+}
+$$('.tabbar button').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.t)));
+
+/* ---------- toast ---------- */
+let toastT=null;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* ---------- sheet ---------- */
+function openSheet(html){
+  $('#sheetBody').innerHTML=html;
+  $('#scrim').classList.add('show'); $('#sheet').classList.add('show');
+}
+function closeSheet(){
+  $('#scrim').classList.remove('show'); $('#sheet').classList.remove('show');
+}
+$('#scrim').addEventListener('click',closeSheet);
+
+/* ---------- home: chips ---------- */
+$('#acctChips').innerHTML=ACCTS.map((a,i)=>
+  `<button class="chip${i===0?' on':''}" data-i="${i}">${a.n} <b>${fmt(a.b)}</b></button>`).join('');
+$$('#acctChips .chip').forEach(c=>c.addEventListener('click',()=>{
+  $$('#acctChips .chip').forEach(x=>x.classList.remove('on')); c.classList.add('on');
+  const a=ACCTS[+c.dataset.i];
+  toast(a.n+': '+fmt(a.b)+' · '+a.s);
+}));
+
+/* ---------- home: txns ---------- */
+function txnRow(x){
+  return `<div class="txn" data-n="${x.n}">
+    <div class="ti" style="background:${x.t==='in'?'var(--mint)':'#f2f2ea'}">${x.e}</div>
+    <div><div class="tn">${x.n}</div><div class="ts">${x.s}</div></div>
+    <div class="ta ${x.t}">${x.t==='in'?'+':'−'}${fmt(x.a).slice(1)}</div></div>`;
+}
+$('#homeTxns').innerHTML=TXNS.slice(0,6).map(txnRow).join('');
+$('#actTxns').innerHTML=TXNS.map(txnRow).join('');
+$$('.txn').forEach(r=>r.addEventListener('click',()=>toast(r.dataset.n+' — from your August statements')));
+$('#raAll').addEventListener('click',()=>goTab('t-activity'));
+
+/* ---------- overviews: view all -> bills sheet ---------- */
+$('#ovAll').addEventListener('click',()=>{
+  openSheet(`<h3>Monthly bills</h3><p class="ssub">$1,773.74 · statement-checked</p>`+
+    BILLS.map(b=>`<div class="kv"><span class="k">${b[0]}<br><small>${b[1]}</small></span><span class="v">${b[1].match(/\$[\d,.]+/)?b[1].match(/\$[\d,.]+/)[0]:''}</span></div>`).join('')+
+    `<button class="bigbtn btn-lime" onclick="closeSheet()">Done</button>`);
+});
+$('#billRows').innerHTML=BILLS.map(b=>{
+  const m=b[1].match(/\$[\d,.]+/);
+  return `<div class="kv"><span class="k">${b[0]}</span><span class="v">${m?m[0]:b[1]}</span></div>`;
+}).join('');
+
+/* ---------- activity chart ---------- */
+function smooth(d){
+  if(d.length<2) return '';
+  let p=`M0,${170-d[0]*150} `;
+  for(let i=0;i<d.length-1;i++){
+    const x0=i/(d.length-1)*340, x1=(i+1)/(d.length-1)*340;
+    const y0=170-d[i]*150, y1=170-d[i+1]*150;
+    const cx=(x0+x1)/2;
+    p+=`C${cx},${y0} ${cx},${y1} ${x1},${y1} `;
   }
-  for (var k=0;k<btns.length;k++){
-    btns[k].addEventListener('click', function(){ show(this.dataset.tab); });
-  }
-})();
+  return p;
+}
+function drawChart(data,labels){
+  const mx=Math.max(...data,1), norm=data.map(v=>v/mx);
+  const line=smooth(norm);
+  const area=line+`L340,170 L0,170 Z`;
+  let dots='', maxI=data.indexOf(Math.max(...data));
+  const mx2=maxI/(data.length-1)*340, my=170-norm[maxI]*150;
+  dots=`<circle cx="${mx2}" cy="${my}" r="5.5" fill="#1f2e1b"/><circle cx="${mx2}" cy="${my}" r="2.6" fill="#d8f75f"/>`;
+  let lbls='';
+  const step=Math.ceil(labels.length/6);
+  labels.forEach((l,i)=>{ if(i%step===0||i===labels.length-1)
+    lbls+=`<text x="${i/(labels.length-1)*340}" y="166" font-size="9.5" fill="#8e8e84" text-anchor="middle">${l}</text>`;});
+  $('#chart').innerHTML=`
+    <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8f75f" stop-opacity=".55"/><stop offset="1" stop-color="#d8f75f" stop-opacity=".04"/>
+    </linearGradient></defs>
+    <path d="${area}" fill="url(#ag)"/>
+    <path d="${line}" fill="none" stroke="#1f2e1b" stroke-width="2.6" stroke-linecap="round"/>${dots}${lbls}
+    <text x="${Math.min(Math.max(mx2-4,34),296)}" y="${Math.max(my-12,14)}" font-size="11.5" font-weight="800" fill="#1f2e1b">${fmt(data[maxI])}</text>`;
+}
+const VIEWS={
+  day:{d:DAY,l:DAY.map((_,i)=>''+(i+1)),tot:AUG_OUT,per:'August 2026 · daily',iv:AUG_IN,is:'August 2026',ov:AUG_OUT,os:'August 2026'},
+  week:{d:WEEK,l:WEEK_LBL,tot:AUG_OUT,per:'August 2026 · weekly',iv:AUG_IN,is:'August 2026',ov:AUG_OUT,os:'August 2026'},
+  month:{d:MO_OUT,l:MO_LBL,tot:MO_OUT_TOT,per:'Jan – Aug 2026 · monthly',iv:MO_IN_TOT,is:'Jan – Aug 2026',ov:MO_OUT_TOT,os:'Jan – Aug 2026'}
+};
+function setView(v){
+  const V=VIEWS[v];
+  $$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  $('#totOut').textContent=fmt(V.tot);
+  $('#totPer').textContent=V.per+' · from statements';
+  $('#inV').textContent=fmt(V.iv); $('#inS').textContent=V.is;
+  $('#outV').textContent=fmt(V.ov); $('#outS').textContent=V.os;
+  drawChart(V.d,V.l);
+}
+$$('#seg button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.v)));
+setView('day');
+
+/* ---------- add money sheet ---------- */
+let amt=100, dest=0;
+function projHTML(){
+  const a=ACCTS[dest===0?2:3];
+  const sept=833+amt, pct=Math.min(100,Math.round(sept/1918.06*100));
+  return `<div class="projbox">Move <b>${fmt(amt)}</b> → <b>${a.n}</b> becomes <b>${fmt(a.b+amt)}</b>.<br>
+  September savings would be <b>${fmt(sept)}</b> of ${fmt(1918.06)} — <b>${pct}%</b> of target.</div>`;
+}
+function addSheet(){
+  openSheet(`<h3>Add money</h3><p class="ssub">Plan a move into savings</p>
+  <div class="amtgrid">${[10,25,50,100,200,500].map(v=>
+    `<button data-a="${v}" class="${v===amt?'on':''}">${v}</button>`).join('')}</div>
+  <div class="destrow${dest===0?' on':''}" data-d="0"><div class="radio"></div>
+    <div><div class="dn">Locked savings</div><div class="ds">${fmt(ACCTS[2].b)}</div></div><div class="da">${fmt(ACCTS[2].b)}</div></div>
+  <div class="destrow${dest===1?' on':''}" data-d="1"><div class="radio"></div>
+    <div><div class="dn">6-mo certificate</div><div class="ds">3.90% APY · matures Feb 20, 2027</div></div><div class="da">${fmt(ACCTS[3].b)}</div></div>
+  <div id="proj">${projHTML()}</div>
+  <button class="bigbtn btn-lime" id="planBtn">Looks good</button>
+  <button class="bigbtn btn-pale" onclick="closeSheet()">Cancel</button>`);
+  $$('#sheetBody .amtgrid button').forEach(b=>b.addEventListener('click',()=>{
+    amt=+b.dataset.a; $$('#sheetBody .amtgrid button').forEach(x=>x.classList.toggle('on',x===b));
+    $('#proj').innerHTML=projHTML();
+  }));
+  $$('#sheetBody .destrow').forEach(r=>r.addEventListener('click',()=>{
+    dest=+r.dataset.d; $$('#sheetBody .destrow').forEach(x=>x.classList.toggle('on',x===r));
+    $('#proj').innerHTML=projHTML();
+  }));
+  $('#planBtn').addEventListener('click',()=>{
+    closeSheet(); toast('Planned: '+fmt(amt)+' → '+ACCTS[dest===0?2:3].n+'. Move it in the SchoolsFirst app.');
+  });
+}
+$('#addBtn').addEventListener('click',addSheet);
+
+/* ---------- withdraw sheet ---------- */
+$('#wdBtn').addEventListener('click',()=>{
+  openSheet(`<h3>Withdraw</h3><p class="ssub">Cash you can actually grab</p>
+  <div class="kv"><span class="k">Checking · Share 01</span><span class="v">${fmt(ACCTS[0].b)}</span></div>
+  <div class="kv"><span class="k">Regular savings · Share 71</span><span class="v">${fmt(ACCTS[1].b)}</span></div>
+  <div class="projbox" style="background:var(--butter)">Locked savings and the certificate aren't ATM cash — the cert matures <b>Feb 20, 2027</b>.</div>
+  <button class="bigbtn btn-lime" onclick="closeSheet()">Got it</button>`);
+});
+
+/* ---------- alerts ---------- */
+$('#bellBtn').addEventListener('click',()=>{
+  openSheet(`<h3>Alerts</h3><p class="ssub">From your statements &amp; plan</p>
+  <div class="alert"><div class="adot" style="background:#1d8a4c"></div>
+    <div><div class="at">GR86 payment on track</div><div class="as">$545.74 / mo at 6.24% APR · $33,770.19 owed as of Aug 31.</div></div></div>
+  <div class="alert"><div class="adot" style="background:#a8c93a"></div>
+    <div><div class="at">Certificate maturing</div><div class="as">$5,839.56 at 3.90% APY matures Feb 20, 2027.</div></div></div>
+  <div class="alert"><div class="adot" style="background:#e0a92e"></div>
+    <div><div class="at">September savings at 43%</div><div class="as">$833 of $1,918.06 saved — $1,085.06 to go.</div></div></div>
+  <button class="bigbtn btn-pale" onclick="closeSheet()">Close</button>`);
+});
+
+/* ---------- banking ---------- */
+$('#bankList').innerHTML=BANKS.map((b,i)=>
+  `<div class="bank${b.dark?' dark':''}" data-i="${i}">
+    <div class="bn"><span>${b.n}</span><span class="chev">›</span></div>
+    <div class="bnum">${b.num}</div>
+    <div class="bbal">${fmt(b.b)}</div>
+    <div class="bmeta">Tap for details</div></div>`).join('');
+$$('#bankList .bank').forEach(el=>el.addEventListener('click',()=>{
+  const b=BANKS[+el.dataset.i];
+  openSheet(`<h3>${b.n}</h3><p class="ssub">${b.num}</p>`+
+    b.rows.map(r=>`<div class="kv"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')+
+    `<button class="bigbtn btn-lime" onclick="closeSheet()">Done</button>`);
+}));
 </script>
 </body>
 </html>
