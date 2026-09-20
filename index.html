@@ -136,7 +136,19 @@ button{font-family:inherit;}
 .hero .acts button svg{width:14px;height:14px;vertical-align:-2px;margin-right:6px;}
 
 /* lavender home (reference look) */
-.lav{background:#e8e8f7;margin:0 -16px;padding:calc(16px + env(safe-area-inset-top)) 22px 46px;position:relative;z-index:1;}
+.lav{background:linear-gradient(135deg,#c9dccd 0%,#edf2ef 18%,#d3e0d9 38%,#f6f9f7 55%,#c7d6cf 75%,#e6ede9 100%);
+  margin:0 -16px;padding:calc(16px + env(safe-area-inset-top)) 22px 46px;position:relative;z-index:1;overflow:hidden;}
+.lav::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);
+  transform:translateX(-130%);animation:glint 9s ease-in-out infinite;}
+@keyframes glint{0%,68%{transform:translateX(-130%);}96%,100%{transform:translateX(130%);}}
+.lav .sub{color:#55645a;}
+.nwrows{margin-top:14px;background:rgba(255,255,255,.45);border:1px solid rgba(31,46,27,.12);border-radius:18px;padding:12px 14px;position:relative;z-index:2;}
+.nwrow{display:flex;justify-content:space-between;font-size:13px;font-weight:700;}
+.nwrow span{color:#4a5a48;font-weight:600;}
+.nwrow b{font-variant-numeric:tabular-nums;}
+.nwbar{height:8px;border-radius:99px;background:rgba(31,46,27,.16);margin:9px 0;overflow:hidden;}
+.nwbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2f6b3a,#5da32e);}
 .lav-top{display:flex;justify-content:space-between;align-items:flex-start;}
 .lav .hi{font-size:17px;font-weight:800;letter-spacing:-.2px;}
 .lav .sub{font-size:12.5px;color:#6f6f84;margin-top:2px;}
@@ -242,16 +254,14 @@ button{font-family:inherit;}
           <button class="iconbtn lt" id="bellBtn" aria-label="Alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></button>
         </div>
       </div>
-      <div class="cur"><span class="curbadge">$</span>USD</div>
-      <div class="bigbal">$10,112<span class="cents">.31</span></div>
+      <div class="cur"><span class="curbadge">$</span>NET WORTH · AUG 31</div>
+      <div class="bigbal">−$23,657<span class="cents">.88</span></div>
+      <div class="nwrows">
+        <div class="nwrow"><span>Assets · 4 accounts</span><b>$10,112.31</b></div>
+        <div class="nwbar"><i style="width:23%"></i></div>
+        <div class="nwrow"><span>Debt · GR86 loan</span><b>$33,770.19</b></div>
+      </div>
       <div class="goalpill">43% of savings goal</div>
-    </div>
-
-    <div class="band">
-      <button class="bandbtn" id="addBtn">Add</button>
-      <button class="bandmid" id="midBtn" aria-label="Activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></button>
-      <button class="bandbtn" id="wdBtn">Withdraw</button>
-      <div class="notch"></div>
     </div>
 
     <div class="ccard">
@@ -263,7 +273,7 @@ button{font-family:inherit;}
         <div>
           <div class="ctitle">Your income <button class="mini-plus" id="incGo" aria-label="See activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
           <div class="incomecard">
-            <div class="ilbl">This month</div>
+            <div class="ilbl">August</div>
             <svg id="minichart" viewBox="0 0 200 64" preserveAspectRatio="none"></svg>
             <div class="irow"><b>$15,249.62</b><span class="goalpill sm">+131.6%</span></div>
           </div>
@@ -476,15 +486,14 @@ $('#scrim').addEventListener('click',closeSheet);
 const SHORT_ACCTS=[
  {n:'Checking',short:'$60',bank:3},
  {n:'Savings',short:'$708',bank:2},
- {n:'Locked',short:'$3.5k',bank:1}
+ {n:'Locked',short:'$3.5k',bank:1},
+ {n:'6-mo cert',short:'$5.8k',bank:0}
 ];
 $('#acc4').innerHTML=SHORT_ACCTS.map((a,i)=>
-  `<button class="accc" data-i="${i}"><span class="c">${a.short}</span><span class="n">${a.n}</span></button>`).join('')+
-  `<button class="accc add" id="accAdd"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="n">Add</span></button>`;
-$$('#acc4 .accc[data-i]').forEach(c=>c.addEventListener('click',()=>{
+  `<button class="accc" data-i="${i}"><span class="c">${a.short}</span><span class="n">${a.n}</span></button>`).join('');
+$$('#acc4 .accc').forEach(c=>c.addEventListener('click',()=>{
   openBank(SHORT_ACCTS[+c.dataset.i].bank);
 }));
-$('#accAdd').addEventListener('click',addSheet);
 
 /* ---------- home: txns ---------- */
 function txnRow(x){
@@ -508,7 +517,6 @@ function openMenu(){
   $('#mAlerts').addEventListener('click',openAlerts);
 }
 $('#menuBtn').addEventListener('click',openMenu);
-$('#midBtn').addEventListener('click',()=>goTab('t-activity'));
 $('#incGo').addEventListener('click',()=>goTab('t-activity'));
 $('#billRows').innerHTML=BILLS.map(b=>{
   const m=b[1].match(/\$[\d,.]+/);
@@ -563,48 +571,6 @@ function setView(v){
 $$('#seg button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.v)));
 setView('day');
 
-/* ---------- add money sheet ---------- */
-let amt=100, dest=0;
-function projHTML(){
-  const a=ACCTS[dest===0?2:3];
-  const sept=833+amt, pct=Math.min(100,Math.round(sept/1918.06*100));
-  return `<div class="projbox">Move <b>${fmt(amt)}</b> → <b>${a.n}</b> becomes <b>${fmt(a.b+amt)}</b>.<br>
-  September savings would be <b>${fmt(sept)}</b> of ${fmt(1918.06)} — <b>${pct}%</b> of target.</div>`;
-}
-function addSheet(){
-  openSheet(`<h3>Add money</h3><p class="ssub">Plan a move into savings</p>
-  <div class="amtgrid">${[10,25,50,100,200,500].map(v=>
-    `<button data-a="${v}" class="${v===amt?'on':''}">${v}</button>`).join('')}</div>
-  <div class="destrow${dest===0?' on':''}" data-d="0"><div class="radio"></div>
-    <div><div class="dn">Locked savings</div><div class="ds">${fmt(ACCTS[2].b)}</div></div><div class="da">${fmt(ACCTS[2].b)}</div></div>
-  <div class="destrow${dest===1?' on':''}" data-d="1"><div class="radio"></div>
-    <div><div class="dn">6-mo certificate</div><div class="ds">3.90% APY · matures Feb 20, 2027</div></div><div class="da">${fmt(ACCTS[3].b)}</div></div>
-  <div id="proj">${projHTML()}</div>
-  <button class="bigbtn btn-lime" id="planBtn">Looks good</button>
-  <button class="bigbtn btn-pale" onclick="closeSheet()">Cancel</button>`);
-  $$('#sheetBody .amtgrid button').forEach(b=>b.addEventListener('click',()=>{
-    amt=+b.dataset.a; $$('#sheetBody .amtgrid button').forEach(x=>x.classList.toggle('on',x===b));
-    $('#proj').innerHTML=projHTML();
-  }));
-  $$('#sheetBody .destrow').forEach(r=>r.addEventListener('click',()=>{
-    dest=+r.dataset.d; $$('#sheetBody .destrow').forEach(x=>x.classList.toggle('on',x===r));
-    $('#proj').innerHTML=projHTML();
-  }));
-  $('#planBtn').addEventListener('click',()=>{
-    closeSheet(); toast('Planned: '+fmt(amt)+' → '+ACCTS[dest===0?2:3].n+'. Move it in the SchoolsFirst app.');
-  });
-}
-$('#addBtn').addEventListener('click',addSheet);
-
-/* ---------- withdraw sheet ---------- */
-$('#wdBtn').addEventListener('click',()=>{
-  openSheet(`<h3>Withdraw</h3><p class="ssub">Cash you can actually grab</p>
-  <div class="kv"><span class="k">Checking · Share 01</span><span class="v">${fmt(ACCTS[0].b)}</span></div>
-  <div class="kv"><span class="k">Regular savings · Share 71</span><span class="v">${fmt(ACCTS[1].b)}</span></div>
-  <div class="projbox" style="background:var(--butter)">Locked savings and the certificate aren't ATM cash — the cert matures <b>Feb 20, 2027</b>.</div>
-  <button class="bigbtn btn-lime" onclick="closeSheet()">Got it</button>`);
-});
-
 /* ---------- alerts ---------- */
 function openAlerts(){
   openSheet(`<h3>Alerts</h3><p class="ssub">From your statements &amp; plan</p>
@@ -635,14 +601,15 @@ $$('#bankList .bank').forEach(el=>el.addEventListener('click',()=>openBank(+el.d
 
 /* ---------- home mini income chart ---------- */
 (function(){
-  const data=MO_IN, mx=Math.max(...data);
-  const pts=data.map((v,i)=>`${(i/(data.length-1)*200).toFixed(1)},${(62-v/mx*56).toFixed(1)}`).join(' ');
+  const data=MO_IN, mx=Math.max(...data), norm=data.map(v=>v/mx), n=norm.length;
+  const X=i=>(6+i*188/(n-1)).toFixed(1), Y=v=>(58-v*52).toFixed(1);
+  const area=`6,64 ${norm.map((v,i)=>`${X(i)},${Y(v)}`).join(' ')} 194,64`;
   $('#minichart').innerHTML=
     `<defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1">`+
     `<stop offset="0" stop-color="#5da32e" stop-opacity=".35"/><stop offset="1" stop-color="#5da32e" stop-opacity=".03"/>`+
     `</linearGradient></defs>`+
-    `<polygon points="0,64 ${pts} 200,64" fill="url(#mg)"/>`+
-    `<polyline points="${pts}" fill="none" stroke="#5da32e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    `<polygon points="${area}" fill="url(#mg)"/>`+
+    `<path d="${smooth(norm,200,64)}" fill="none" stroke="#5da32e" stroke-width="2.2" stroke-linecap="round"/>`;
 })();
 </script>
 </body>
